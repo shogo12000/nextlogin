@@ -1,7 +1,7 @@
 import cookie from 'cookie';
-
+import { serialize } from 'cookie';
 export async function POST(req) { 
-    const serializedCookie = cookie.serialize('auth_token', '', {
+    const serializedCookie = serialize('auth_token', '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'Strict',
