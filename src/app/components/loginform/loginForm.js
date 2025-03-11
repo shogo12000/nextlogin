@@ -8,7 +8,7 @@ const LoginForm = ( ) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsAuthenticated } = useContext(AuthContext);
-  const {loading, setLoading } = useState(false);
+  const [loading, setLoading ] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
