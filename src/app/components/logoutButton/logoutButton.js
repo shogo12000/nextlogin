@@ -1,9 +1,10 @@
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/authContext';
 import { useContext } from 'react';
 
 const LogoutButton = () => {
   const { setIsAuthenticated } = useContext(AuthContext);
+  const router = useRouter();
   const handleLogout = async () => {
     try {
       const response = await fetch('/api/auth/logout', {
@@ -16,7 +17,7 @@ const LogoutButton = () => {
       if (response.ok) {
         setIsAuthenticated(false);
         // Redireciona o usuário para a página de login ou outra página após o logout
-        redirect('/login');
+        router.push('/login');
       } else {
         console.log('Erro ao fazer logout');
       }

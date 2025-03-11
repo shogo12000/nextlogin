@@ -4,6 +4,7 @@ import connectDB from '@/app/db/db';
 import User from '@/models/User'
 import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server';
+import { serialize } from 'cookie';
 
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
@@ -35,7 +36,7 @@ export async function POST(req) {
 
     const token = generateToken(email);
     console.log("gerado token.....")
-    const serializedCookie = cookie.serialize('auth_token', token, {
+    const serializedCookie =  serialize('auth_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'Strict',
