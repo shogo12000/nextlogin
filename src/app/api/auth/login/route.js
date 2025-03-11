@@ -40,7 +40,7 @@ export async function POST(req) {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'Strict',
-        maxAge: 60 * 2 ,  
+        maxAge: 60 * 5 ,  
         path: '/',
     });
 
