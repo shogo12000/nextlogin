@@ -3,6 +3,7 @@ import cookie from 'cookie';
 import connectDB from '@/app/db/db';
 import User from '@/models/User'
 import bcrypt from 'bcryptjs'
+import { NextResponse } from 'next/server';
 
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
@@ -42,11 +43,17 @@ export async function POST(req) {
         path: '/',
     });
 
-    return new Response(JSON.stringify({ message: 'POST request to /api/teste' }), {
-        status: 200,
-        headers: {
-            'Set-Cookie': serializedCookie,   
-            'Content-Type': 'application/json',
-        },
-    });
+    const response = NextResponse.json({ success: true, token });
+
+    // Adicionando o cookie à resposta
+    response.headers.set("Set-Cookie", serializedCookie);
+    return response;
+
+    // return new Response(JSON.stringify({ message: 'POST request to /api/teste' }), {
+    //     status: 200,
+    //     headers: {
+    //         'Set-Cookie': serializedCookie,   
+    //         'Content-Type': 'application/json',
+    //     },
+    // });
 }

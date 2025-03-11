@@ -19,7 +19,8 @@ const LoginForm = ( ) => {
       },
       body: JSON.stringify({ email:email, password: password })
     })
-
+    console.log("...............");
+    console.log(response);
     if(response.ok){
       setIsAuthenticated(true);
       redirect('/pageone');
