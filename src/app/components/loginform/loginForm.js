@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { AuthContext } from '@/app/context/authContext';
 import { useContext } from 'react';
+import Loading from './loading';
 
 const LoginForm = ( ) => {
   const [email, setEmail] = useState('');
@@ -34,7 +35,7 @@ const LoginForm = ( ) => {
 
   if(loading){
     return <div>
-      <h1>LOADING...</h1>
+      <Loading />
     </div>
   }
 
