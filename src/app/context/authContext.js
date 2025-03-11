@@ -1,17 +1,16 @@
 'use client';
 import { createContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) =>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const router = useRouter();
     
     const checkAuth = async()=>{
         const response = await (await fetch("/api/auth/checkToken")).json();
         setIsAuthenticated(response.token);
- 
-        router.push('/login');
+        console.log(response.token)
+        if(!response.token) redirect("/")
     }
     
     useEffect(()=>{
