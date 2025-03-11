@@ -5,15 +5,16 @@ import { AuthContext } from '@/app/context/authContext';
 import { useContext } from 'react';
 import Loading from './loading';
 
-const LoginForm = ( ) => {
+const LoginForm = ({handleForm}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsAuthenticated } = useContext(AuthContext);
-  const [loading, setLoading ] = useState(false);
+  // const [loading, setLoading ] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
+    handleForm(true);
     const response = await fetch("/api/auth/login",{
       method: "POST",
       headers:{
@@ -24,20 +25,21 @@ const LoginForm = ( ) => {
  
     console.log(response);
     if(response.ok){
-      setLoading(false);
+      // setLoading(false);
       setIsAuthenticated(true);
       redirect('/pageone');
     }else {
       console.log("tratae erro")
     }
+ 
   
   };
 
-  if(loading){
-    return <div>
-      <Loading />
-    </div>
-  }
+  // if(loading){
+  //   return <div>
+  //     <Loading />
+  //   </div>
+  // }
 
   return (
     <form onSubmit={onSubmit}>
