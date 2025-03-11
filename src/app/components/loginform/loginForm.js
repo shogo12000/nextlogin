@@ -8,10 +8,11 @@ const LoginForm = ( ) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsAuthenticated } = useContext(AuthContext);
+  const {loading, setLoading } = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const response = await fetch("/api/auth/login",{
       method: "POST",
       headers:{
@@ -19,16 +20,23 @@ const LoginForm = ( ) => {
       },
       body: JSON.stringify({ email:email, password: password })
     })
-    console.log("...............");
+ 
     console.log(response);
     if(response.ok){
+      setLoading(false);
       setIsAuthenticated(true);
       redirect('/pageone');
     }else {
       console.log("tratae erro")
     }
- 
+  
   };
+
+  if(loading){
+    return <div>
+      <h1>LOADING...</h1>
+    </div>
+  }
 
   return (
     <form onSubmit={onSubmit}>
