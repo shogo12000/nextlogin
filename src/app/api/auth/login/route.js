@@ -26,7 +26,7 @@ export async function POST(req) {
     if (!user) {
         return new Response(JSON.stringify({ message: 'Usuário não encontrado' }), { status: 401 });
     }
-
+    console.log("passou aqui ........");
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -34,7 +34,7 @@ export async function POST(req) {
     }
 
     const token = generateToken(email);
-
+    console.log("gerado token.....")
     const serializedCookie = cookie.serialize('auth_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
