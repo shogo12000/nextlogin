@@ -14,7 +14,7 @@ export const AuthProvider = ({children}) =>{
     }
     
     useEffect(()=>{
-        const interval = setInterval(checkAuth, 3000);
+        const interval = setInterval(checkAuth, 30000);
         return ()=> clearIntervale(interval);
     },[])
     return (
